@@ -19,3 +19,8 @@ After finishing the renderer, I want to work on implementing an Entity / GameObj
 
 My goal for this system is to easily be able to entities that automatically get moved to the world, while they automatically get rendered. 
 
+### 3. Make seperate game project. 
+After finishing the engine system, I want to make a seperate game project, which I then link the engine to. Doing this will create a more clear distinction between code that is supposed to be built upon, and gameplay code. To verify whether this works, I will make sure to add a very simple player that can move around in the scene throughout the gameplay project. 
+
+### 4. Physics system
+As someone who is especially interested in Physics, I naturally want to link a simple Physics system to the codebase. I then want to tie this Physics System to the Entity system, to make sure that works as easily as the integration with the renderer. 
