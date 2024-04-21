@@ -9,7 +9,7 @@ The first thing I want to do within the engine project is create a very simple r
 
 I will be using OpenGL for this, since it's by far the simplest Graphics API to integrate into other systems, and since I have written a renderer with it before. My main resource will be https://learnopengl.com/. 
 
-The current scope for the rendering API is very simple: I want to have the minimum amount of features that can make me do most of the things I want to do. This generally comes down to.
+The current scope for the rendering API is very simple: I want to have the minimum amount of features that can make me do most of the things I want to do. This generally comes down to: 
 - Model drawing
 - Texture support
 - Line drawing
