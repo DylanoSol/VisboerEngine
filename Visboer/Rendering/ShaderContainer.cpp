@@ -19,6 +19,12 @@ void ShaderContainer::UseShader()
 	glUseProgram(m_shaderID); 
 }
 
+void ShaderContainer::RecompileShader()
+{
+	DeleteShader(); 
+	CompileShader(); 
+}
+
 unsigned int ShaderContainer::GetShaderID()
 {
 	return m_shaderID; 
@@ -136,4 +142,11 @@ void ShaderContainer::CompileShader()
 	//Delete the shaders
 	glDeleteShader(vertex);
 	glDeleteShader(fragment);
+}
+
+void ShaderContainer::DeleteShader()
+{
+	//Set to not use shader, then delete
+	glUseProgram(0); 
+	glDeleteProgram(m_shaderID); 
 }

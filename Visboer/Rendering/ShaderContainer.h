@@ -8,6 +8,7 @@ public:
 	ShaderContainer(const char* vertexPath, const char* fragmentPath); 
 
 	void UseShader(); 
+	void RecompileShader(); 
 
 	unsigned int GetShaderID(); 
 
@@ -19,6 +20,7 @@ public:
 	
 private: 
 	void CompileShader(); 
+	void DeleteShader(); 
 
 	const char* m_vertexPath; 
 	const char* m_fragmentPath; 

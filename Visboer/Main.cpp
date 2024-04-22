@@ -23,6 +23,8 @@ unsigned int indices[] = {
     1, 2, 3   
 };
 
+ShaderContainer* shader = nullptr; 
+
 int main()
 {
    
@@ -57,7 +59,7 @@ int main()
     //OpenGL hello triangle
   
     //Set up shader
-    ShaderContainer shader("Shaders/testShader.vert", "Shaders/testShader.frag");
+    shader = new ShaderContainer("Shaders/testShader.vert", "Shaders/testShader.frag"); 
 
     //Set up VAO
     unsigned int VAO; 
@@ -96,7 +98,7 @@ int main()
         glClear(GL_COLOR_BUFFER_BIT);
         
         //Draw triangle
-        shader.UseShader(); 
+        shader->UseShader(); 
         glBindVertexArray(VAO); 
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0); 
 
@@ -114,6 +116,8 @@ int main()
     glDeleteBuffers(1, &EBO); 
 
     //Remove all resources
+    delete shader; 
+
     glfwTerminate();
     return 0;
 }
@@ -122,6 +126,9 @@ void processInput(GLFWwindow* window)
 {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
+
+    if (glfwGetKey(window, GLFW_KEY_APOSTROPHE) == GLFW_PRESS)
+        shader->RecompileShader(); 
 }
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
