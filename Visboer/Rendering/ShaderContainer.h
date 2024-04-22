@@ -4,6 +4,7 @@
 
 class ShaderContainer
 {
+public: 
 	ShaderContainer(const char* vertexPath, const char* fragmentPath); 
 
 	void UseShader(); 

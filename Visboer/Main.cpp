@@ -1,6 +1,8 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include "Rendering/ShaderContainer.h"
+
 #include <iostream>
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
@@ -9,22 +11,6 @@ void processInput(GLFWwindow* window);
 //settings
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
-
-//Temp hard coded vertex shader
-const char* vertexShaderSource = "#version 460 core\n"
-"layout (location = 0) in vec3 aPos;\n"
-"void main()\n"
-"{\n"
-"   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
-"}\0";
-
-//Temp hard coded fragment shader
-const char* fragmentShaderSource = "#version 460 core\n"
-"out vec4 FragColor; \n"
-"void main() \n"
-"{\n"
-"   FragColor = vec4(1.0f, 1.0f, 0.2f, 1.0f);\n"
-"}\0"; 
 
 float vertices[] = {
      0.5f,  0.5f, 0.0f,  
@@ -69,6 +55,9 @@ int main()
     }
 
     //OpenGL hello triangle
+  
+    //Set up shader
+    ShaderContainer shader("Shaders/testShader.vert", "Shaders/testShader.frag");
 
     //Set up VAO
     unsigned int VAO; 
@@ -93,36 +82,6 @@ int main()
     //Set up vertex attributes
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
-
-    //Set up vertex shader
-    unsigned int vertexShader; 
-    vertexShader = glCreateShader(GL_VERTEX_SHADER); 
-
-    glShaderSource(vertexShader, 1, &vertexShaderSource, NULL); 
-    glCompileShader(vertexShader); 
-
-    //Set up fragment shader
-    unsigned int fragmentShader; 
-    fragmentShader = glCreateShader(GL_FRAGMENT_SHADER); 
-
-    glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL); 
-    glCompileShader(fragmentShader); 
-
-    //Create shader program
-    unsigned int shaderProgram; 
-    shaderProgram = glCreateProgram(); 
-
-    //Set up shader program
-    glAttachShader(shaderProgram, vertexShader); 
-    glAttachShader(shaderProgram, fragmentShader); 
-
-    glLinkProgram(shaderProgram); 
-
-    glUseProgram(shaderProgram); 
-
-    //Delete shaders after linking
-    glDeleteShader(vertexShader); 
-    glDeleteShader(fragmentShader); 
     
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); 
 
@@ -137,7 +96,7 @@ int main()
         glClear(GL_COLOR_BUFFER_BIT);
         
         //Draw triangle
-        glUseProgram(shaderProgram); 
+        shader.UseShader(); 
         glBindVertexArray(VAO); 
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0); 
 
@@ -153,7 +112,6 @@ int main()
     glDeleteVertexArrays(1, &VAO); 
     glDeleteBuffers(1, &VBO); 
     glDeleteBuffers(1, &EBO); 
-    glDeleteProgram(shaderProgram); 
 
     //Remove all resources
     glfwTerminate();
