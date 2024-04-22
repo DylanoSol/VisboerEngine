@@ -17,6 +17,6 @@ class ShaderContainer
 	
 	
 private: 
-	unsigned int m_ShaderID; 
+	unsigned int m_shaderID; 
 };
 
