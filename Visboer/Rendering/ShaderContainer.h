@@ -18,6 +18,11 @@ public:
 	
 	
 private: 
+	void CompileShader(); 
+
+	const char* m_vertexPath; 
+	const char* m_fragmentPath; 
+
 	unsigned int m_shaderID; 
 };
 
