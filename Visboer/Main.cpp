@@ -1,3 +1,7 @@
+#include "imgui.h"
+#include "imgui_impl_glfw.h"
+#include "imgui_impl_opengl3.h"
+
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
@@ -87,6 +91,12 @@ int main()
     
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); 
 
+    //Initialize ImGui
+    ImGui::CreateContext(); 
+    ImGuiIO& io = ImGui::GetIO(); (void)io; 
+    ImGui_ImplGlfw_InitForOther(window, true); 
+    ImGui_ImplOpenGL3_Init("#version 460"); 
+
     //Main loop
     while (!glfwWindowShouldClose(window))
     {
@@ -96,20 +106,40 @@ int main()
         //Clear screen
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
+
+        //ImGui start frame
+        ImGui_ImplOpenGL3_NewFrame(); 
+        ImGui_ImplGlfw_NewFrame(); 
+        ImGui::NewFrame(); 
         
         //Draw triangle
         shader->UseShader(); 
         glBindVertexArray(VAO); 
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0); 
 
+        //ImGui update
+        ImGui::Begin("Hello ImGui"); 
+        ImGui::End(); 
+        
+        ImGui::ShowDemoWindow();
+
         //Deselect vertex array
-        glBindVertexArray(0); 
+        glBindVertexArray(0);
+
+        //ImGui Render
+        ImGui::Render(); 
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData()); 
 
         //Swap buffer and poll input output
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
-    
+
+    //Shut down ImGui
+    ImGui_ImplOpenGL3_Shutdown(); 
+    ImGui_ImplGlfw_Shutdown(); 
+    ImGui::DestroyContext(); 
+
     //Deallocate resources
     glDeleteVertexArrays(1, &VAO); 
     glDeleteBuffers(1, &VBO); 
