@@ -7,6 +7,7 @@
 #include <GLFW/glfw3.h>
 
 #include <stb_image.h>
+#include <glm/glm.hpp>
 
 #include "Rendering/ShaderContainer.h"
 
@@ -35,9 +36,14 @@ unsigned int indices[] = {
 
 ShaderContainer* shader = nullptr; 
 
+glm::vec3 test = glm::vec3(0.f, 5.f, 0.f); 
+
 int main()
 {
    
+    //Test GLM
+    printf("GLM test reports: %f \n", test.y); 
+
     //Initialize the window using OpenGL 4.6 
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);

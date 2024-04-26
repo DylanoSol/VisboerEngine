@@ -48,7 +48,7 @@
     <ClCompile Include="Rendering\TextureContainer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="3rdParty\stb_image.cpp">
+    <ClCompile Include="3rdParty\stb_image\stb_image.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -83,7 +83,7 @@
     <ClInclude Include="3rdParty\ImGui\imstb_truetype.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="3rdParty\stb_image.h">
+    <ClInclude Include="3rdParty\stb_image\stb_image.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Rendering\TextureContainer.h">

@@ -2,7 +2,9 @@
 
 TextureContainer::TextureContainer(const char* texturePath)
 {
-
+	//
+	// Note to self: Set up later. Focus on setting up a camera first
+	//
 }
 
 void TextureContainer::UseTexture()
