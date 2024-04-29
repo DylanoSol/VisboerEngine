@@ -45,6 +45,11 @@ void ShaderContainer::SetFloat(const std::string& name, float value) const
 	glUniform1f(glGetUniformLocation(m_shaderID, name.c_str()), value);
 }
 
+void ShaderContainer::SetMat4(const std::string& name, const glm::mat4& mat)
+{
+	glUniformMatrix4fv(glGetUniformLocation(m_shaderID, name.c_str()), 1, GL_FALSE, &mat[0][0]);
+}
+
 void ShaderContainer::CompileShader()
 {
 	//Get the source code from the desired file paths. 
